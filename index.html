@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" /
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gensyn AI Quiz</title>
   <style>
@@ -76,6 +76,7 @@
     /* =========================
        Landing / Hero
        ========================= */
+    #landing{ padding-bottom: 1rem } /* keep space above footer */
     .logo{
       font-size:clamp(2rem,5vw,3.4rem);
       font-weight:900; letter-spacing:.3px; margin-bottom:1rem;
@@ -93,7 +94,7 @@
       background:linear-gradient(180deg, rgba(0,212,255,0.13), rgba(0,212,255,0.06));
       border:1px solid rgba(0,212,255,0.28);
       box-shadow:0 0 24px rgba(0,255,224,0.07) inset;
-      border-radius:12px; padding:.75rem 1.25rem; margin-bottom:1.8rem;
+      border-radius:12px; padding:.75rem 1.25rem; margin-bottom:1.1rem;
       font-size:1rem; font-weight:700; color:#E9FCFF;
     }
     .btn{
@@ -106,6 +107,27 @@
     .btn:hover{ transform:translateY(-1px); filter:brightness(1.04);
       box-shadow:0 14px 34px rgba(0,212,255,0.26), 0 0 0 1px rgba(0,255,224,0.5) inset }
     .btn:active{ transform:translateY(0) scale(.99) }
+
+    /* ===== Menu under CTA ===== */
+    .menu-links{
+      display:flex; flex-wrap:wrap; gap:12px;
+      justify-content:center; align-items:center;
+      margin-top:12px; margin-bottom:8px;
+    }
+    .menu-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.75rem 1.1rem; border-radius:12px; text-decoration:none;
+      font-weight:800; letter-spacing:.2px; color:#00121A;
+      background: linear-gradient(135deg, var(--accent) 0%, #61E9FF 100%);
+      box-shadow: 0 10px 26px rgba(0,212,255,0.18), 0 0 0 1px rgba(0,212,255,0.45) inset;
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+    }
+    .menu-btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 14px 34px rgba(0,212,255,0.26), 0 0 0 1px rgba(0,255,224,0.50) inset;
+    }
+    .menu-btn:active{ transform: translateY(0) scale(.99) }
 
     /* =========================
        Quiz UI
@@ -166,6 +188,7 @@
     .footer{
       position:relative; z-index:2; text-align:center; padding:1.5rem;
       border-top:1px solid rgba(255,255,255,0.08);
+      margin-top:auto; /* push footer down */
     }
     .footer a{
       color:var(--accent); text-decoration:none; font-size:.95rem; font-weight:600;
@@ -192,11 +215,17 @@
     <div id="landing" class="view active">
       <h1 class="logo">Gensyn AI Quiz</h1>
       <p class="description">
-        Welcome to Gensyn AI quiz mania.
-        10 quick questions to test your knowledge on machine intelligence. Let's get started.
+        Welcome to Gensyn AI quiz mania. 10 quick questions to test your knowledge on machine intelligence. Let's get started.
       </p>
       <div class="pill">Total Questions: 10</div>
       <button class="btn" onclick="startQuiz()">Start Quiz</button>
+
+      <!-- New menu under CTA -->
+      <nav class="menu-links" aria-label="Primary">
+        <a class="menu-btn" href="https://www.gensyn.ai" target="_blank" rel="noopener">Home</a>
+        <a class="menu-btn" href="https://blog.gensyn.ai" target="_blank" rel="noopener">Blogs</a>
+        <a class="menu-btn" href="https://docs.gensyn.ai" target="_blank" rel="noopener">Docs</a>
+      </nav>
     </div>
 
     <!-- Quiz Page -->
