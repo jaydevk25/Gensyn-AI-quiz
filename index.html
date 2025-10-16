@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Responsive viewport for mobile-friendly sizing and scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Gensyn AI quiz</title>
   <style>
     /* =========================
@@ -10,9 +11,8 @@
        ========================= */
     * { margin:0; padding:0; box-sizing:border-box }
     :root{
-      /* Deep neutral-brown canvas with soft pink accents */
-      --bg-1:#0F0C0A;         /* base background (deep brown/black) */
-      --bg-2:#15100E;         /* glass/card layer (brown tint) */
+      --bg-1:#0F0C0A;         /* deep brown/black canvas */
+      --bg-2:#15100E;         /* brown-tinted glass */
       --accent:#F6C2D9;       /* light pink primary */
       --accent-2:#EE9FBC;     /* rose pink secondary */
       --text:#FFFFFF;         /* text */
@@ -24,7 +24,7 @@
       --radius-16:16px;
       --radius-20:20px;
 
-      --topbar-h:72px;
+      --topbar-h:72px;        /* fixed header height */
     }
 
     html,body{height:100%}
@@ -72,7 +72,7 @@
       white-space:nowrap;
     }
 
-    /* Header buttons (moved to top-right) */
+    /* Header buttons (top-right, opposite title) */
     .header-actions{
       display:flex; align-items:center; gap:10px; flex-wrap:wrap;
     }
@@ -93,7 +93,7 @@
       box-shadow: 0 14px 34px rgba(246,194,217,0.28), 0 0 0 1px rgba(255,215,232,0.55) inset;
     }
 
-    /* Subtle vignette */
+    /* Subtle vignette (no background logo) */
     .bg-vignette{
       position:fixed; inset:0; z-index:0; pointer-events:none;
       background: radial-gradient(60% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.55) 100%);
@@ -146,7 +146,6 @@
     }
     .btn:hover{ transform:translateY(-1px); filter:brightness(1.05);
       box-shadow:0 14px 34px rgba(246,194,217,0.30), 0 0 0 1px rgba(255,215,232,0.55) inset }
-    .btn:active{ transform:translateY(0) scale(.99) }
 
     /* =========================
        Quiz UI
@@ -176,7 +175,7 @@
       text-align:left;
     }
     .question-text{ font-size:1.25rem; font-weight:800; margin-bottom:1.2rem; line-height:1.5 }
-    .options{ display:grid; gap:.9rem }
+    .options{ display:grid; gap:.9rem; margin-bottom:1rem; }
     .option{
       background:rgba(255,255,255,0.06);
       border:2px solid rgba(255,255,255,0.16);
@@ -192,7 +191,13 @@
     .option.correct{ border-color:var(--ok); background:rgba(34,197,94,0.18) }
     .option.incorrect{ border-color:var(--err); background:rgba(239,68,68,0.18) }
 
-    /* Results */
+    /* Next button: prominent and placed below options, similar to Start button */
+    .next-row{ display:flex; justify-content:flex-start; }
+    .next-btn{ margin-top:.5rem; }
+
+    /* =========================
+       Results
+       ========================= */
     .score-card{
       background:rgba(255,255,255,0.04);
       border:2px solid rgba(246,194,217,0.30);
@@ -250,7 +255,7 @@
     </div>
   </header>
 
-  <!-- Subtle vignette -->
+  <!-- Subtle vignette only (no background logo) -->
   <div class="bg-vignette" aria-hidden="true"></div>
 
   <div class="container">
@@ -274,7 +279,13 @@
       <div class="card">
         <div class="question-text" id="questionText"></div>
         <div class="options" id="optionsContainer"></div>
-        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+
+        <!-- Prominent Next button below options (skip current question) -->
+        <div class="next-row">
+          <button class="btn next-btn" id="nextBtn" type="button" aria-label="Skip to next question" onclick="nextQuestion()">
+            Next question
+          </button>
+        </div>
       </div>
     </div>
 
@@ -294,7 +305,7 @@
   </footer>
 
   <script>
-    // Quiz data (unchanged)
+    // Quiz data (10 drawn at random for each run)
     const quizQuestions = [
       { question: "What is Gensyn primarily designed for?", options: ["Social media management", "Machine learning computation protocol", "E-commerce platform", "Gaming development"], correct: 1 },
       { question: "Which type of blockchain technology does Gensyn use?", options: ["Bitcoin blockchain", "Standalone blockchain", "Ethereum rollup", "Binance Smart Chain"], correct: 2 },
@@ -329,8 +340,6 @@
       { question: "What is Gensyn's Deep Brown RGB color value?", options: ["rgb(50, 25, 10)", "rgb(40, 15, 5)", "rgb(35, 8, 0)", "rgb(30, 10, 2)"], correct: 2 },
       { question: "Which font family does Gensyn use for display and headings?", options: ["Simplon Mono Light", "Aux Mono", "Mondwest", "Arial"], correct: 2 },
       { question: "Which font is used for Gensyn's main body copy?", options: ["Mondwest", "Simplon Mono Light", "Aux Mono", "Helvetica"], correct: 1 },
-      { question: "What font does Gensyn use for core application UI?", options: ["Mondwest", "Simplon Mono Light", "Aux Mono", "Times New Roman"], correct: 2 },
-      { question: "What is Gensyn's main background color RGB value?", options: ["rgb(0, 0, 0)", "rgb(15, 15, 15)", "rgb(10, 10, 10)", "rgb(5, 5, 5)"], correct: 2 },
       { question: "According to Gensyn's research, what performance gain does their protocol achieve versus Truebit-style replication?", options: ["500%", "1000%", "1350%", "2000%"], correct: 2 },
       { question: "What performance gain does Gensyn achieve versus Ethereum for ML tasks?", options: ["100,000%", "500,000%", "1,000,000%", "2,522,477%"], correct: 3 },
       { question: "What is the time overhead that Gensyn's protocol adds to model training?", options: ["~30%", "~46%", "~60%", "~75%"], correct: 1 },
@@ -343,7 +352,6 @@
       { question: "According to research, what percentage of US GDP could AI training spending reach by 2031?", options: ["0.5%", "1%", "2%", "3%"], correct: 1 },
       { question: "What does 'RepOps' stand for in Gensyn's Verde system?", options: ["Reproducible Operations", "Reliable Operations", "Remote Operations", "Responsive Operations"], correct: 0 },
       { question: "What distinguishes Gensyn's approach from traditional centralized AI training?", options: ["Faster processing speed", "Better accuracy", "Open, permissionless, and neutral protocols", "Lower memory requirements"], correct: 2 },
-      { question: "What role does game theory play in Gensyn's protocol?", options: ["Entertainment purposes", "User engagement", "Ensuring honest behavior through staking and slashing incentives", "Random number generation"], correct: 2 },
       { question: "What does Gensyn's graph-based pinpoint protocol enable?", options: ["Faster data transfer", "Multi-granular verification work comparison and chain confirmation", "Better user interfaces", "Reduced energy consumption"], correct: 1 }
     ];
 
@@ -434,6 +442,16 @@
       }, 950);
     }
 
+    // Skip/Next handler (advances without answering)
+    function nextQuestion() {
+      if (currentQuestionIndex < 9) {
+        currentQuestionIndex++;
+        displayQuestion();
+      } else {
+        showResults();
+      }
+    }
+
     // Results
     function showResults() {
       document.getElementById('finalScore').textContent = `${score}/10`;
@@ -441,7 +459,7 @@
       if (score >= 9) msg = 'Outstanding! You have excellent knowledge of Gensyn AI!';
       else if (score >= 7) msg = 'Great job! You have a solid understanding of Gensyn AI!';
       else if (score >= 5) msg = 'Good effort! Explore more about Gensyn AI to level up!';
-      else msg = 'Keep going—there’s a lot more to discover about Gensyn AI!';
+      else msg = 'Keep going ! there’s a lot more to discover about Gensyn AI!';
       document.getElementById('scoreMessage').textContent = msg;
       showView('results');
     }
