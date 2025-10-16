@@ -119,4 +119,335 @@
       font-size:clamp(1.8rem,5vw,3.2rem);
       font-weight:900; letter-spacing:.3px; margin-bottom:1rem;
       text-shadow:0 0 18px rgba(246,194,217,0.16);
-      background:linear-gradient(135deg, var(--text) 0%, #FFEFF6 35%, var(--accent) 70%, var(--accent
+      background:linear-gradient(135deg, var(--text) 0%, #FFEFF6 35%, var(--accent) 70%, var(--accent-2) 100%);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+    }
+    .description{
+      font-size:clamp(1rem,2.1vw,1.15rem);
+      color:rgba(255,255,255,0.86);
+      margin:0 auto 1.6rem; line-height:1.6; max-width:760px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(180deg, rgba(246,194,217,0.14), rgba(238,159,188,0.10));
+      border:1px solid rgba(246,194,217,0.32);
+      box-shadow:0 0 24px rgba(255,215,232,0.10) inset, 0 10px 28px rgba(0,0,0,0.28);
+      border-radius:var(--radius-12); padding:.75rem 1.25rem; margin-bottom:1.1rem;
+      font-size:1rem; font-weight:800; color:#FFF4F8;
+    }
+    .btn{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      color:#2A1518; border:none; border-radius:var(--radius-12);
+      padding:1rem 1.4rem; font-size:1.05rem; font-weight:800; cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      box-shadow:
+        0 10px 26px rgba(246,194,217,0.20),
+        0 0 0 1px rgba(246,194,217,0.55) inset;
+    }
+    .btn:hover{ transform:translateY(-1px); filter:brightness(1.05);
+      box-shadow:0 14px 34px rgba(246,194,217,0.30), 0 0 0 1px rgba(255,215,232,0.55) inset }
+    .btn:active{ transform:translateY(0) scale(.99) }
+
+    /* =========================
+       Quiz UI
+       ========================= */
+    .progress{
+      background:rgba(255,255,255,0.08); outline:1px solid rgba(246,194,217,0.22);
+      border-radius:20px; height:8px; width:100%; margin-bottom:1.5rem; overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25) inset;
+    }
+    .progress-bar{
+      background:linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+      height:100%; border-radius:20px; transition:width .45s ease;
+      box-shadow:0 0 12px rgba(246,194,217,0.35);
+    }
+    .question-info{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:1.2rem; font-size:.95rem; color:rgba(255,255,255,0.85);
+    }
+    .card{
+      background: rgba(255,255,255,0.04);
+      border:1px solid rgba(246,194,217,0.24);
+      border-radius:var(--radius-16); padding:1.5rem; margin-bottom:1.5rem;
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 8px 26px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(238,159,188,0.10) inset;
+      text-align:left;
+    }
+    .question-text{ font-size:1.25rem; font-weight:800; margin-bottom:1.2rem; line-height:1.5 }
+    .options{ display:grid; gap:.9rem }
+    .option{
+      background:rgba(255,255,255,0.06);
+      border:2px solid rgba(255,255,255,0.16);
+      border-radius:var(--radius-12); padding:1rem 1.2rem; cursor:pointer; color:var(--text);
+      transition:border-color .18s ease, background .18s ease, transform .12s ease, box-shadow .18s ease;
+    }
+    .option:hover{
+      border-color:var(--accent);
+      background:linear-gradient(135deg, rgba(246,194,217,0.14), rgba(238,159,188,0.10));
+      box-shadow:0 8px 28px rgba(246,194,217,0.14);
+      transform: translateY(-1px);
+    }
+    .option.correct{ border-color:var(--ok); background:rgba(34,197,94,0.18) }
+    .option.incorrect{ border-color:var(--err); background:rgba(239,68,68,0.18) }
+
+    /* Results */
+    .score-card{
+      background:rgba(255,255,255,0.04);
+      border:2px solid rgba(246,194,217,0.30);
+      border-radius:var(--radius-20); padding:2.25rem 1.75rem; text-align:center;
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 28px rgba(0,0,0,0.30), 0 0 0 1px rgba(238,159,188,0.10) inset;
+    }
+    .score-title{
+      font-size:1.9rem; margin-bottom:.6rem; font-weight:900;
+      background:linear-gradient(135deg, var(--text) 0%, #FFEFF6 35%, var(--accent) 70%, var(--accent-2) 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 18px rgba(246,194,217,0.15);
+    }
+    .score-display{ font-size:3rem; font-weight:900; color:var(--text); margin-bottom:.5rem }
+    .score-message{ font-size:1.05rem; color:rgba(255,255,255,0.86); margin-bottom:1.25rem }
+
+    .footer{
+      position:relative; z-index:1; text-align:center; padding:1.5rem;
+      border-top:1px solid rgba(255,255,255,0.08);
+      margin-top:auto;
+    }
+    .footer a{
+      color:var(--accent); text-decoration:none; font-size:.95rem; font-weight:700;
+      transition:color .18s ease, text-shadow .18s ease;
+      text-shadow:0 0 12px rgba(246,194,217,0.18);
+    }
+    .footer a:hover{ color:#FFEFF6; text-shadow:0 0 16px rgba(246,194,217,0.32) }
+
+    @media (max-width: 768px) {
+      .container { padding: 1rem }
+      .card { padding: 1.25rem }
+      .question-text { font-size: 1.1rem }
+      .score-display { font-size: 2.4rem }
+      .brand-title { font-size: 18px }
+      .brand-mark { width:30px; height:30px }
+      .header-actions { gap:8px }
+      .nav-btn { padding:.55rem .8rem }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed top bar with logo/title on left and buttons on right -->
+  <header class="topbar" role="banner" aria-label="Site Header">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img class="brand-mark" alt="Gensyn logo"
+             src="https://cdn.prod.website-files.com/66bc6da8fe284e4693088ff7/66bc6da8fe284e4693088ffe_Gensyn-Symbol.svg" />
+        <div class="brand-title">Gensyn AI quiz</div>
+      </div>
+      <nav class="header-actions" aria-label="Primary">
+        <a class="nav-btn" href="https://www.gensyn.ai" target="_blank" rel="noopener">Home</a>
+        <a class="nav-btn" href="https://blog.gensyn.ai" target="_blank" rel="noopener">Blogs</a>
+        <a class="nav-btn" href="https://docs.gensyn.ai" target="_blank" rel="noopener">Docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Subtle vignette -->
+  <div class="bg-vignette" aria-hidden="true"></div>
+
+  <div class="container">
+    <!-- Landing Page -->
+    <div id="landing" class="view active">
+      <h1 class="hero-title">Ready to play?</h1>
+      <p class="description">
+        Welcome to Gensyn AI quiz mania. 10 quick questions to test your knowledge on machine intelligence. Let's get started.
+      </p>
+      <div class="pill">Total Questions: 10</div>
+      <button class="btn" onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz" class="view">
+      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="question-info">
+        <span id="questionNumber">Question 1 of 10</span>
+        <span>Score: <span id="currentScore">0</span></span>
+      </div>
+      <div class="card">
+        <div class="question-text" id="questionText"></div>
+        <div class="options" id="optionsContainer"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+      </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="results" class="view">
+      <div class="score-card">
+        <h2 class="score-title">Quiz Complete!</h2>
+        <div class="score-display" id="finalScore">0/10</div>
+        <p class="score-message" id="scoreMessage">Great job completing the quiz!</p>
+        <button class="btn" onclick="restartQuiz()">Take Quiz Again</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="https://x.com/kaizoku_ap" target="_blank" rel="noopener">made with ❤️ by kaizoku</a>
+  </footer>
+
+  <script>
+    // Quiz data (unchanged)
+    const quizQuestions = [
+      { question: "What is Gensyn primarily designed for?", options: ["Social media management", "Machine learning computation protocol", "E-commerce platform", "Gaming development"], correct: 1 },
+      { question: "Which type of blockchain technology does Gensyn use?", options: ["Bitcoin blockchain", "Standalone blockchain", "Ethereum rollup", "Binance Smart Chain"], correct: 2 },
+      { question: "What is the main problem Gensyn aims to solve?", options: ["Limited access to ML compute resources", "Slow internet connections", "Data storage issues", "Social media algorithm bias"], correct: 0 },
+      { question: "What are the four main components of the Gensyn Protocol?", options: ["Storage, Computing, Mining, Trading", "Consistent ML execution, Trustless verification, P2P communication, Decentralized coordination", "Data collection, Model training, Inference, Deployment", "Registration, Authentication, Processing, Payment"], correct: 1 },
+      { question: "What is RL Swarm?", options: ["A trading bot platform", "A collaborative reinforcement learning framework", "A data storage solution", "A blockchain mining tool"], correct: 1 },
+      { question: "What is Verde in the Gensyn ecosystem?", options: ["A token name", "A verification protocol for machine learning programs", "A user interface design", "A mining algorithm"], correct: 1 },
+      { question: "What is Judge in Gensyn's ecosystem?", options: ["A legal compliance tool", "A cryptographically verifiable AI evaluation system", "A user authentication system", "A performance monitoring tool"], correct: 1 },
+      { question: "What is BlockAssist?", options: ["A blockchain explorer", "An AI Minecraft assistant for reinforcement learning research", "A block validation tool", "A cryptocurrency wallet"], correct: 1 },
+      { question: "What is GenRL?", options: ["A programming language", "A framework for creating advanced RL environments", "A data analytics tool", "A blockchain consensus mechanism"], correct: 1 },
+      { question: "What is CheckFree in Gensyn's research?", options: ["A payment processing system", "A novel recovery method for distributed training failures", "A data validation protocol", "A user verification system"], correct: 1 },
+      { question: "What is NoLoCo?", options: ["A location tracking system", "An optimization method that replaces global synchronization with gossip methods", "A no-code development platform", "A local computing protocol"], correct: 1 },
+      { question: "What is SAPO in Gensyn's research?", options: ["A security protocol", "A meta-algorithm that wraps around policy gradient algorithms", "A data processing format", "A communication standard"], correct: 1 },
+      { question: "What license is used for Gensyn's peer-to-peer collaborative RL code?", options: ["GPL License", "Apache License", "MIT License", "BSD License"], correct: 2 },
+      { question: "According to the information, what are AI training costs projected to reach?", options: ["$50B per run", "$75B per run", "$100B per run", "$150B per run"], correct: 2 },
+      { question: "What is Gensyn's approach to ML compute infrastructure?", options: ["Centralized data centers only", "Cloud-based solutions", "Decentralized infrastructure across edge devices", "Mobile-only computing"], correct: 2 },
+      { question: "What is the main advantage of Gensyn's verification system?", options: ["It's faster than traditional methods", "It uses probabilistic proof-of-learning and graph-based protocols", "It requires less energy", "It works offline"], correct: 1 },
+      { question: "What type of network is Gensyn building?", options: ["Social network", "Payment network", "Network for machine intelligence", "Content delivery network"], correct: 2 },
+      { question: "What is the projected cost advantage of Gensyn compared to traditional cloud providers?", options: ["10% cheaper", "25% cheaper", "50% cheaper", "Significantly cheaper (around $0.40 vs $2+ for cloud providers)"], correct: 3 },
+      { question: "What is the role of the Gensyn Foundation?", options: ["Technical development only", "Decentralized governance and treasury management", "Marketing and promotion", "Legal compliance"], correct: 1 },
+      { question: "What are the three phases of Gensyn's development roadmap?", options: ["Alpha, Beta, Production", "Development, Testing, Launch", "Testnet, Canarynet, Mainnet", "Research, Implementation, Deployment"], correct: 2 },
+      { question: "What type of hardware can participate in the Gensyn network?", options: ["Only high-end GPUs", "Only data center equipment", "Any device capable of performing ML workloads", "Only ASIC miners"], correct: 2 },
+      { question: "What is the minimum GPU VRAM recommended for Gensyn testnet participation?", options: ["8GB", "16GB", "24GB (recommended, but <24GB supported)", "32GB"], correct: 2 },
+      { question: "Which models are currently supported in the reasoning-gym swarm?", options: ["Only OpenAI models", "Qwen2.5 variants, nvidia/AceInstruct, and custom Gensyn models", "Only Google models", "Only Meta models"], correct: 1 },
+      { question: "What is the minimum RAM requirement for CPU-only participation?", options: ["16GB", "24GB", "32GB", "64GB"], correct: 2 },
+      { question: "What is the minimum CUDA driver version required?", options: ["≥11.0", "≥12.0", "≥12.4", "≥13.0"], correct: 2 },
+      { question: "How many daily transactions does Gensyn currently process?", options: ["100,000+", "250,000+", "450,000+", "1,000,000+"], correct: 2 },
+      { question: "What percentage reduction in operational costs has Gensyn achieved?", options: ["85.5%", "92.3%", "98.9%", "99.5%"], correct: 2 },
+      { question: "How much monthly savings on API costs has Gensyn achieved through optimization?", options: ["$5,000", "$10,000", "$15,000", "$20,000"], correct: 2 },
+      { question: "What is Gensyn's primary brand color?", options: ["Deep Brown", "Primary Pink", "Background Black", "Pure White"], correct: 1 },
+      { question: "What RGB value represents Gensyn's Primary Pink color?", options: ["rgb(255, 200, 180)", "rgb(250, 215, 209)", "rgb(240, 180, 200)", "rgb(255, 220, 190)"], correct: 1 },
+      { question: "What is Gensyn's Deep Brown RGB color value?", options: ["rgb(50, 25, 10)", "rgb(40, 15, 5)", "rgb(35, 8, 0)", "rgb(30, 10, 2)"], correct: 2 },
+      { question: "Which font family does Gensyn use for display and headings?", options: ["Simplon Mono Light", "Aux Mono", "Mondwest", "Arial"], correct: 2 },
+      { question: "Which font is used for Gensyn's main body copy?", options: ["Mondwest", "Simplon Mono Light", "Aux Mono", "Helvetica"], correct: 1 },
+      { question: "What font does Gensyn use for core application UI?", options: ["Mondwest", "Simplon Mono Light", "Aux Mono", "Times New Roman"], correct: 2 },
+      { question: "What is Gensyn's main background color RGB value?", options: ["rgb(0, 0, 0)", "rgb(15, 15, 15)", "rgb(10, 10, 10)", "rgb(5, 5, 5)"], correct: 2 },
+      { question: "According to Gensyn's research, what performance gain does their protocol achieve versus Truebit-style replication?", options: ["500%", "1000%", "1350%", "2000%"], correct: 2 },
+      { question: "What performance gain does Gensyn achieve versus Ethereum for ML tasks?", options: ["100,000%", "500,000%", "1,000,000%", "2,522,477%"], correct: 3 },
+      { question: "What is the time overhead that Gensyn's protocol adds to model training?", options: ["~30%", "~46%", "~60%", "~75%"], correct: 1 },
+      { question: "Which blockchain network will Gensyn's canarynet launch on?", options: ["Ethereum", "Polkadot", "Kusama", "Binance Smart Chain"], correct: 2 },
+      { question: "Which blockchain network will host Gensyn's mainnet?", options: ["Ethereum", "Polkadot", "Kusama", "Solana"], correct: 1 },
+      { question: "What is the total funding Gensyn has raised to date (as mentioned in the research)?", options: ["Over $30 million", "Over $43 million", "Over $50 million", "Over $75 million"], correct: 2 },
+      { question: "Which prominent investor led Gensyn's Series A funding round?", options: ["Sequoia Capital", "a16z (Andreessen Horowitz)", "Binance Labs", "Coinbase Ventures"], correct: 1 },
+      { question: "What year was Gensyn's Series A funding completed?", options: ["2022", "2023", "2024", "2025"], correct: 1 },
+      { question: "What is the primary focus of Gensyn's long-term vision?", options: ["Replacing all cloud providers", "Creating AGI through decentralized, collectively-owned foundation models", "Building the fastest blockchain", "Dominating the AI chip market"], correct: 1 },
+      { question: "According to research, what percentage of US GDP could AI training spending reach by 2031?", options: ["0.5%", "1%", "2%", "3%"], correct: 1 },
+      { question: "What does 'RepOps' stand for in Gensyn's Verde system?", options: ["Reproducible Operations", "Reliable Operations", "Remote Operations", "Responsive Operations"], correct: 0 },
+      { question: "What distinguishes Gensyn's approach from traditional centralized AI training?", options: ["Faster processing speed", "Better accuracy", "Open, permissionless, and neutral protocols", "Lower memory requirements"], correct: 2 },
+      { question: "What role does game theory play in Gensyn's protocol?", options: ["Entertainment purposes", "User engagement", "Ensuring honest behavior through staking and slashing incentives", "Random number generation"], correct: 2 },
+      { question: "What does Gensyn's graph-based pinpoint protocol enable?", options: ["Faster data transfer", "Multi-granular verification work comparison and chain confirmation", "Better user interfaces", "Reduced energy consumption"], correct: 1 }
+    ];
+
+    // Game state
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let selectedQuestions = [];
+    let answered = false;
+
+    // Shuffle helper
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // View switch
+    function showView(id) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Start quiz
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      answered = false;
+      selectedQuestions = shuffleArray(quizQuestions).slice(0, 10);
+      showView('quiz');
+      displayQuestion();
+    }
+
+    // Render current question
+    function displayQuestion() {
+      const q = selectedQuestions[currentQuestionIndex];
+      const n = currentQuestionIndex + 1;
+
+      document.getElementById('questionNumber').textContent = `Question ${n} of 10`;
+      document.getElementById('currentScore').textContent = score;
+      document.getElementById('questionText').textContent = q.question;
+      document.getElementById('progressBar').style.width = `${(n / 10) * 100}%`;
+
+      const container = document.getElementById('optionsContainer');
+      container.innerHTML = '';
+
+      q.options.forEach((opt, i) => {
+        const el = document.createElement('div');
+        el.className = 'option';
+        el.textContent = `${String.fromCharCode(65 + i)}. ${opt}`;
+        el.onclick = () => selectOption(i, el);
+        container.appendChild(el);
+      });
+
+      answered = false;
+    }
+
+    // Handle selection (auto-advance after short delay)
+    function selectOption(index, el) {
+      if (answered) return;
+      answered = true;
+
+      const q = selectedQuestions[currentQuestionIndex];
+      const options = [...document.querySelectorAll('.option')];
+
+      // Disable further clicks
+      options.forEach(o => o.style.pointerEvents = 'none');
+
+      // Reveal correct and mark incorrect if needed
+      options[q.correct].classList.add('correct');
+      if (index !== q.correct) {
+        el.classList.add('incorrect');
+      } else {
+        score++;
+        document.getElementById('currentScore').textContent = score;
+      }
+
+      // Auto-advance after 950ms
+      setTimeout(() => {
+        if (currentQuestionIndex < 9) {
+          currentQuestionIndex++;
+          displayQuestion();
+        } else {
+          showResults();
+        }
+      }, 950);
+    }
+
+    // Results
+    function showResults() {
+      document.getElementById('finalScore').textContent = `${score}/10`;
+      let msg = '';
+      if (score >= 9) msg = 'Outstanding! You have excellent knowledge of Gensyn AI!';
+      else if (score >= 7) msg = 'Great job! You have a solid understanding of Gensyn AI!';
+      else if (score >= 5) msg = 'Good effort! Explore more about Gensyn AI to level up!';
+      else msg = 'Keep going—there’s a lot more to discover about Gensyn AI!';
+      document.getElementById('scoreMessage').textContent = msg;
+      showView('results');
+    }
+
+    // Restart
+    function restartQuiz() { showView('landing') }
+  </script>
+</body>
+</html>
